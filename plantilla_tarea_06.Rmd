@@ -1,0 +1,174 @@
+---
+title: "Tarea 6"
+author: '[correo alumno(a)]'
+output: html_document 
+---
+
+---
+
+# Instrucciones
+
+- Esta tarea se centra en el análisis comparativo de la media para dos grupos, incorporando ejercicios de prueba t, ANOVA y regresión.
+
+- Para llevar a cabo esta tarea, utilizaremos datos de la Encuesta Social Europea (European Social Survey) del 2020. El objetivo de esta encuesta es examinar las actitudes, creencias y comportamientos de la población europea. Para obtener más información sobre este estudio, puedes visitar https://www.europeansocialsurvey.org/data/.
+
+- En este ejercicio, analizaremos los datos de las muestras de Francia y Noruega del año 2020, específicamente las respuestas relacionadas con la satisfacción general con la vida de los encuestados.
+
+- La base de datos que usaremos es una versión resumida de los datos originales, que incluye las siguientes variables:
+
+```
+
+idno       Número que identifica al participante
+stflife    Nivel de satisfaccion con la vida
+           valores 0 a 11, donde mayor valor, indica mayor satisfacción.
+gndr       Sexo del participante (1 = hombres, 2 = mujeres)
+cntry      Pais (cntry) (FR = Francia, NO = Noruega)
+
+```
+
+- El archivo que contiene los datos, es el siguiente:
+
+```
+
+ess10_sat.csv
+
+```
+
+- En este ejercicio, no sólo vamos a calcular resultados, sino que vamos a describir resultados en el formato en que lo hacen los manuscritos académicos. Para resolver esta tarea se requiere seguir a los capitulos de Huck (2012) para guiarse respecto a cómo describir los resultados en formato manuscrito de cada una de las técnicas a emplear (regresión, prueba t y ANOVA).
+
+
+- **Nota importante**: Los datos originales provienen de una muestra probabilística, lo que permite hacer inferencias sobre la población si se utiliza la información del diseño para producir estimaciones. Sin embargo, en este ejercicio con propósitos ilustrativos, vamos a ignorar este aspecto y solo vamos a generar resultados descriptivos.
+
+---
+
+# Ejercicio 1. Abrir datos.
+
+- Inserte los códigos para abrir la base de datos `ess10_sat.csv`. Utilice la función `read.csv()`, y llame a los datos `datos_ess`.
+
+
+
+```{r}
+
+# cada texto despues de un "#" es un comentario
+
+# Agregue los códigos de cada ejercicio, en estas secciones del archivo.
+
+datos_ess <- read.csv(ess10_sat.csv)
+
+```
+
+# Ejercicio 2. Preparar datos.
+
+- Ejecute los siguientes comandos reemplazando el valor ‘123456789’ por su Rut (sin dígito verificador) para crear y guardar una submuestra de 1000 casos de Francia y Noruega. No altere el resto de los comandos. Guárdelo en un objeto denominado `datos_frno`. 
+
+```{r}
+
+# Fijar el seed, permite obtener la misma muestra aleatoria, 
+#                cada vez que trabaje con el codigo.
+#                Es importante que los datos de su tarea,
+#                sean generados con su RUT.
+
+
+library(dplyr)
+set.seed(1234567890)
+datos_frno <- datos_ess %>%
+              dplyr::filter(cntry %in% c('FR', 'NO')) %>%
+              dplyr::slice_sample(n = 1000, by = cntry)
+
+```
+
+
+Los siguientes ejercicios se realizan utilizando el objeto denominado `datos_frno`.
+
+# Ejercicio 3. Descriptivos
+
+- Considerando las variables seleccionadas responda a la siguiente pregunta:
+
+- **¿Cuál es el promedio en la escala de satisfacción con la vida de Francia y Noruega?** Genere una tabla que muestre los promedios de cada grupo. *Describa los resultados encontrados, empleando dos decimales, e interprete los resultados para cada uno (e.g., indique qué grupo presenta un mayor valor que el otro).*
+
+
+```{r}
+
+# Escriba y edite el codigo que permita inspeccionar los datos obtenidos.
+
+# Recomendaciones: para producir los descriptivos por grupo, se recomienda
+#                  emplear las funciones `group_by()` y `summarize()`.
+
+```
+
+- **Respuesta**
+  - `#....indicar su respuesta en esta línea, y borrar este comentario.`
+
+
+# Ejercicio 4
+
+- En el ejercicio 3, observamos el promedio en la escala de satisfacción con la vida de Francia y Noruega.
+
+- Ajuste un modelo de regresión lineal utilizando la escala de satisfacción con la vida como variable de respuesta. Incorpore al modelo como variable independiente el país. Genere una tabla que muestre los resultados de la regresión.
+
+- Describa los resultados encontrados en formato manuscrito. Primero describa los resultados encontrados, haciendo referencia a los resultados globales del modelo ajustado. En su descripción haga referencia a los resultados de R cuadrado, y de la prueba F. Luego describa los resultados observados, respecto al intercepto y la pendiente incluidas en el modelo ajustado, haciendo interpretación de los resultados encontrados.
+
+
+```{r}
+
+# Escriba y edite el codigo que permita resolver el ejercicio.
+
+```
+
+## Respuesta
+
+`#....indicar su respuesta en las siguientes lineas, borrando este comentario.`
+
+
+# Ejercicio 6
+
+- En el ejericicio anterior ajustamos un modelo de regresión. Sobre los mismos datos, aplique una prueba t para muestras independientes que permita evalaur si las diferencias observadas entre ambos grupos son estadísticamente significativas. 
+
+- Reporte el estadígrafo de la prueba e indique si hay diferencias significativas entre los países comparados haciendo referencia a la hipótesis nula.
+
+
+```{r}
+
+# Escriba y edite el codigo que permita resolver el ejercicio.
+
+```
+
+## Respuesta
+
+`#....indicar su respuesta en las siguientes lineas, borrando este comentario.`
+
+
+# Ejercicio 7
+
+- En el ejercicio 4 observamos el promedio en la escala de satisfacción con la vida segun país en que se encuentra la persona: Francia o Noruega. Realice una prueba ANOVA para identificar si las diferencias observadas entre los dos grupos son estadisticamente significativas. 
+
+- Reporte el estadígrafo de la prueba e indique si hay diferencias significativas entre los países comparados haciendo referencia a la hipótesis nula.
+
+
+```{r}
+
+# Escriba y edite el codigo que permita resolver el ejercicio.
+
+```
+
+## Respuesta
+
+`#....indicar su respuesta en las siguientes lineas, borrando este comentario.`
+
+
+
+# Ejercicio 8
+
+A partir de los resultados observados. Conteste las siguientes preguntas.
+
+- Pregunta 8.1.: **Obtuvo resultados similares por las tres pruebas aplicadas (regresion, prueba t y ANOVA)?**. _Indique en su respuesta si los resultados lo llevan a las mismas conclusiones._
+
+`#....indicar su respuesta en las siguientes lineas, borrando este comentario.`
+
+- Pregunta 8.2.: **¿Por qué los resultados de las tres técnicas empleadas son similares?** _Indique en su respuesta las similitudes que poseen las técnicas empleadas_.
+
+`#....indicar su respuesta en las siguientes lineas, borrando este comentario.`
+
+- Pregunta 8.3.: **¿Cuál de las tres técnicas le parece más informativa?** _Indique en su respuesta las similitudes que poseen las técnicas empleadas_.
+
+`#....indicar su respuesta en las siguientes lineas, borrando este comentario.`
